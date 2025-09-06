@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Prompt Playground - Interactive AI Carbon Footprint Explorer</title>
+    
+    <!-- Professional Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- D3.js for visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vertical-analysis.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usage-guide.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+                    <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <h1>Carbon Prompt Playground</h1>
+            </div>
+            <div class="subtitle">
+                Enterprise-grade AI Carbon Footprint Analytics Platform - Optimize your prompts for sustainable AI development
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <!-- Usage Guide -->
+            <div class="container">
+            <div class="usage-guide">
+                <div class="usage-header">
+                    <div class="usage-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="usage-title">
+                        <h2>How to Use Carbon Prompt Playground</h2>
+                        <p class="usage-subtitle">Master AI carbon footprint analysis in 4 simple steps</p>
+                    </div>
+                    <div class="usage-actions">
+                        <button class="btn btn-sm btn-outline" id="toggle-guide">
+                            <i class="fas fa-eye"></i> Hide Guide
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="usage-content" id="usage-content">
+                    <div class="usage-steps">
+                        <div class="usage-step" data-step="1">
+                            <div class="step-indicator">
+                                <div class="step-number">1</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <h4 class="step-title">
+                                        <i class="fas fa-edit"></i>
+                                        Enter Your Prompt
+                                    </h4>
+                                    <span class="step-badge">Essential</span>
+                                </div>
+                                <p class="step-description">
+                                    Type your AI prompt in the text area and select prompt type, length, and complexity settings. 
+                                    This forms the foundation of your carbon analysis.
+                                </p>
+                                <div class="step-tips">
+                                    <div class="tip-item">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span>Try different prompt types to see impact variations</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="usage-step" data-step="2">
+                            <div class="step-indicator">
+                                <div class="step-number">2</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <h4 class="step-title">
+                                        <i class="fas fa-sliders-h"></i>
+                                        Adjust Parameters
+                                    </h4>
+                                    <span class="step-badge">Customize</span>
+                                </div>
+                                <p class="step-description">
+                                    Fine-tune token length, inference time, and energy consumption using the interactive sliders. 
+                                    Watch real-time updates as you adjust values.
+                                </p>
+                                <div class="step-tips">
+                                    <div class="tip-item">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Lower values generally mean lower carbon emissions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="usage-step" data-step="3">
+                            <div class="step-indicator">
+                                <div class="step-number">3</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <h4 class="step-title">
+                                        <i class="fas fa-search-plus"></i>
+                                        Analyze Impact
+                                    </h4>
+                                    <span class="step-badge">Insights</span>
+                                </div>
+                                <p class="step-description">
+                                    Click "Analyze Carbon Impact" to get real-time predictions and beautiful visualizations. 
+                                    Explore charts, metrics, and environmental comparisons.
+                                </p>
+                                <div class="step-tips">
+                                    <div class="tip-item">
+                                        <i class="fas fa-eye"></i>
+                                        <span>Check the right panel for detailed analysis results</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="usage-step" data-step="4">
+                            <div class="step-indicator">
+                                <div class="step-number">4</div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-header">
+                                    <h4 class="step-title">
+                                        <i class="fas fa-leaf"></i>
+                                        Optimize Efficiency
+                                    </h4>
+                                    <span class="step-badge">Improve</span>
+                                </div>
+                                <p class="step-description">
+                                    Use insights and recommendations to reduce your prompt's environmental impact. 
+                                    Iterate and experiment to find the perfect balance.
+                                </p>
+                                <div class="step-tips">
+                                    <div class="tip-item">
+                                        <i class="fas fa-recycle"></i>
+                                        <span>Use optimization tips to minimize carbon footprint</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="usage-footer">
+                        <div class="quick-actions">
+                            <h5><i class="fas fa-rocket"></i> Quick Start</h5>
+                            <div class="action-buttons">
+                                <button class="btn btn-sm btn-primary" onclick="playground.loadRandomExample()">
+                                    <i class="fas fa-flask"></i> Try Example
+                                </button>
+                                <button class="btn btn-sm btn-success" onclick="playground.focusPromptInput()">
+                                    <i class="fas fa-edit"></i> Start Here
+                                </button>
+                            </div>
+                        </div>
+                        <div class="usage-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Simple Steps</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">∞</div>
+                                <div class="stat-label">Possibilities</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">🌱</div>
+                                <div class="stat-label">Eco-Friendly</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Main playground container -->
+    <div class="playground-container">
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="panel-section">
+                <h3><i class="fas fa-code"></i> Prompt Configuration</h3>
+                <div class="input-group">
+                    <label for="prompt-text">AI Prompt Content:</label>
+                    <textarea id="prompt-text" placeholder="Enter your AI prompt here... (e.g., 'Classify this requirement as functional or non-functional')" rows="4"></textarea>
+                </div>
+                
+                <div class="controls-row">
+                    <div class="control-group">
+                        <label for="prompt-type">Prompt Type:</label>
+                        <select id="prompt-type">
+                            <option value="zero_shot">Zero-shot</option>
+                            <option value="few_shot">Few-shot</option>
+                            <option value="cot">Chain-of-Thought</option>
+                            <option value="alessio_user">Alessio User</option>
+                            <option value="detailed">Detailed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="length-type">Length Type:</label>
+                        <select id="length-type">
+                            <option value="short">Short</option>
+                            <option value="medium">Medium</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="complexity">Complexity:</label>
+                        <select id="complexity">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-cogs"></i> Technical Parameters</h3>
+                <div class="controls-row">
+                    <div class="control-group">
+                        <label for="token-length">Token Length: <span id="token-display">25</span></label>
+                        <input type="range" id="token-length" min="5" max="200" value="25" class="slider">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="inference-time">Inference Time (s): <span id="time-display">15.5</span></label>
+                        <input type="range" id="inference-time" min="1" max="100" value="15.5" step="0.1" class="slider">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="energy">Energy (J): <span id="energy-display">0.095</span></label>
+                        <input type="range" id="energy" min="0.01" max="1.0" value="0.095" step="0.001" class="slider">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-bolt"></i> Analysis Actions</h3>
+                <div class="action-buttons">
+                    <button id="predict-btn" class="btn btn-primary">
+                        <i class="fas fa-chart-line"></i> Analyze Carbon Impact
+                    </button>
+                    <button id="random-btn" class="btn btn-secondary">
+                        <i class="fas fa-flask"></i> Load Example
+                    </button>
+                    <button id="optimize-btn" class="btn btn-success">
+                        <i class="fas fa-leaf"></i> Optimize Efficiency
+                    </button>
+                    <button id="reset-btn" class="btn btn-outline">
+                        <i class="fas fa-refresh"></i> Reset Parameters
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3><i class="fas fa-chart-bar"></i> Live Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="carbon-value">0.000000</div>
+                        <div class="metric-label">Carbon Emission</div>
+                        <div class="metric-unit">grams CO₂</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="efficiency-value">-</div>
+                        <div class="metric-label">Efficiency Score</div>
+                        <div class="metric-unit">performance index</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="carbon-per-token">0.000000</div>
+                        <div class="metric-label">Carbon Intensity</div>
+                        <div class="metric-unit">CO₂/token</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization Area -->
+        <div class="visualization-area">
+            
+            <!-- Main Carbon Emission Visualization -->
+            <div class="viz-section main-viz">
+                <h3><i class="fas fa-chart-area"></i> Real-time Carbon Emission Analysis</h3>
+                <div id="carbon-chart" class="chart-container"></div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #10B981;"></span>
+                        <span>Low Impact</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #F59E0B;"></span>
+                        <span>Medium Impact</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #EF4444;"></span>
+                        <span>High Impact</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Visualizations Grid -->
+            <div class="viz-grid">
+                <!-- Energy vs Carbon Relationship -->
+                <div class="viz-section">
+                    <h3><i class="fas fa-lightning-bolt"></i> Energy-Carbon Correlation</h3>
+                    <div id="energy-carbon-chart" class="chart-container"></div>
+                </div>
+
+                <!-- Feature Importance -->
+                <div class="viz-section">
+                    <h3><i class="fas fa-chart-bar"></i> Feature Impact Analysis</h3>
+                    <div id="feature-importance-chart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <!-- Comparison with Dataset -->
+            <div class="viz-section">
+                <h3><i class="fas fa-chart-column"></i> Benchmark Comparison</h3>
+                <div id="comparison-chart" class="chart-container"></div>
+            </div>
+        </div>
+        
+        <!-- Vertical Analysis Results Panel -->
+        <div class="analysis-results-vertical">
+            <div class="analysis-header-vertical">
+                <div class="analysis-title-vertical">
+                    <i class="fas fa-chart-line"></i>
+                    Analysis Results
+                </div>
+            </div>
+            
+            <div class="analysis-section-vertical">
+                <h3><i class="fas fa-leaf"></i> Carbon Emission</h3>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Current Emission:</span>
+                    <span class="metric-value-vertical primary" id="analysis-carbon">0.00008400 g CO₂</span>
+                </div>
+                <div class="impact-indicator-vertical">
+                    <div class="impact-bar-vertical" id="impact-bar"></div>
+                    <span class="status-badge-vertical success" id="impact-status">Very Low</span>
+                </div>
+            </div>
+            
+            <div class="analysis-section-vertical">
+                <h3><i class="fas fa-bolt"></i> Energy Consumption</h3>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Energy Used:</span>
+                    <span class="metric-value-vertical secondary" id="analysis-energy">0.084000 J</span>
+                </div>
+            </div>
+            
+            <div class="analysis-section-vertical">
+                <h3><i class="fas fa-gauge"></i> Efficiency Metrics</h3>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Efficiency Score:</span>
+                    <span class="metric-value-vertical" id="analysis-efficiency">2.40</span>
+                </div>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Carbon Intensity:</span>
+                    <span class="metric-value-vertical" id="analysis-intensity">0.00000284 CO₂/token</span>
+                </div>
+            </div>
+            
+            <div class="analysis-section-vertical">
+                <h3><i class="fas fa-cog"></i> Model Performance</h3>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Algorithm:</span>
+                    <span class="metric-value-vertical" id="analysis-model">Linear Regression</span>
+                </div>
+                <div class="metric-row-vertical">
+                    <span class="metric-label-vertical">Confidence:</span>
+                    <span class="status-badge-vertical info" id="analysis-confidence">High</span>
+                </div>
+            </div>
+            
+            <div class="analysis-section-vertical">
+                <div class="environmental-metrics-vertical">
+                    <h4><i class="fas fa-globe"></i> Environmental Impact</h4>
+                    <div class="env-metric-vertical">
+                        <span class="env-metric-label-vertical">Impact Level:</span>
+                        <span class="env-metric-value-vertical" id="env-impact">Very Low</span>
+                    </div>
+                    <div class="env-metric-vertical">
+                        <span class="env-metric-label-vertical">Tree Equivalent:</span>
+                        <span class="env-metric-value-vertical" id="env-trees">0.004200 trees/day</span>
+                    </div>
+                    <div class="env-metric-vertical">
+                        <span class="env-metric-label-vertical">CO₂ Equivalent:</span>
+                        <span class="env-metric-value-vertical" id="env-co2">84.000 mg</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="optimization-section-vertical">
+                <h4><i class="fas fa-lightbulb"></i> Optimization Tips</h4>
+                <p id="optimization-text">Your prompt is already quite efficient! Consider reducing token length for even lower carbon impact.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Error</h3>
+                <span class="close" onclick="playground.closeErrorModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="error-message">An error occurred.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="playground.closeErrorModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Prompts Modal -->
+    <div id="samples-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-list"></i> Sample Prompts</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="sample-prompts-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-question-circle"></i> How to Use the Playground</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="help-content">
+                    <h4>🎮 Getting Started</h4>
+                    <p>The Carbon Prompt Playground helps you understand the environmental impact of AI prompts. Here's how to use it:</p>
+                    
+                    <h4>📝 Input Your Prompt</h4>
+                    <ul>
+                        <li>Type your AI prompt in the text area</li>
+                        <li>Select the prompt type (zero-shot, few-shot, etc.)</li>
+                        <li>Choose the complexity and length category</li>
+                    </ul>
+                    
+                    <h4>⚙️ Adjust Parameters</h4>
+                    <ul>
+                        <li><strong>Token Length:</strong> Number of tokens in your prompt</li>
+                        <li><strong>Inference Time:</strong> How long the AI takes to process</li>
+                        <li><strong>Energy:</strong> Energy consumption during processing</li>
+                    </ul>
+                    
+                    <h4>📊 Understand the Visualizations</h4>
+                    <ul>
+                        <li><strong>Carbon Emission Chart:</strong> Real-time prediction with historical context</li>
+                        <li><strong>Energy-Carbon Relationship:</strong> Shows the linear relationship</li>
+                        <li><strong>Feature Impact:</strong> What factors influence carbon footprint most</li>
+                        <li><strong>Comparison Analysis:</strong> How your prompt compares to others</li>
+                    </ul>
+                    
+                    <h4>🌱 Optimize for Sustainability</h4>
+                    <ul>
+                        <li>Use the "Optimize for Low Carbon" button for suggestions</li>
+                        <li>Try shorter, more direct prompts</li>
+                        <li>Monitor the efficiency rating</li>
+                        <li>Follow the tips in the information panel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <button id="help-btn" class="fab" title="Documentation">
+            <i class="fas fa-book"></i>
+        </button>
+        <button id="samples-btn" class="fab" title="Example Library">
+            <i class="fas fa-database"></i>
+        </button>
+        <button id="toggle-info" class="fab" title="Analysis Panel">
+            <i class="fas fa-chart-pie"></i>
+        </button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner">
+            <i class="fas fa-leaf fa-spin"></i>
+        </div>
+        <div class="loading-text">Predicting carbon emission...</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

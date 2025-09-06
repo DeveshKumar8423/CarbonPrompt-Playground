@@ -1,0 +1,31 @@
+# Carbon Prompt Playground - Docker Compose Configuration
+# =======================================================
+
+version: '3.8'
+
+services:
+  carbon-playground:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONPATH=/app
+    volumes:
+      - ./final_experiment_results.csv:/app/final_experiment_results.csv:ro
+      - ./best_carbon_predictor.pkl:/app/best_carbon_predictor.pkl:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/model_info"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.carbon-playground.rule=Host(`carbon-playground.localhost`)"
+      - "traefik.http.services.carbon-playground.loadbalancer.server.port=5000"
+
+networks:
+  default:
+    name: carbon-playground-network

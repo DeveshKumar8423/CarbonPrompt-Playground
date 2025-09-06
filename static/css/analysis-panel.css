@@ -1,0 +1,221 @@
+/* ===================================
+   Analysis Results Panel - Professional Design
+   =================================== */
+
+.analysis-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  height: fit-content;
+  position: sticky;
+  top: 120px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  transition: var(--transition-all);
+  animation: slideInRight 0.6s ease-out;
+}
+
+.analysis-panel:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+.analysis-panel h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-900);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  letter-spacing: -0.025em;
+  position: relative;
+}
+
+.analysis-panel h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-emerald), var(--accent-blue));
+  border-radius: var(--radius-full);
+  opacity: 0.8;
+}
+
+.analysis-panel h2 i {
+  color: var(--accent-emerald);
+  font-size: var(--font-size-lg);
+  padding: var(--space-2);
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.analysis-section {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.analysis-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.analysis-section h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--gray-800);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.analysis-section h3 i {
+  color: var(--accent-emerald);
+  font-size: var(--font-size-sm);
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+}
+
+.metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  font-size: var(--font-size-sm);
+  color: var(--gray-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.metric-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--gray-900);
+  font-family: var(--font-family-mono);
+}
+
+.metric-value.primary {
+  color: var(--accent-emerald);
+  font-size: var(--font-size-base);
+}
+
+.metric-value.secondary {
+  color: var(--accent-blue);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-badge.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-badge.info {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-blue);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.impact-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.impact-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+}
+
+.impact-dot.medium {
+  background: var(--warning);
+}
+
+.impact-dot.high {
+  background: var(--error);
+}
+
+.optimization-tip {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+.optimization-tip p {
+  font-size: var(--font-size-sm);
+  color: var(--gray-700);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.environmental-metrics {
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin: var(--space-3) 0;
+}
+
+.environmental-metrics h4 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--gray-800);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.environmental-metrics h4 i {
+  color: var(--accent-emerald);
+}
+
+.env-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-1) 0;
+  font-size: var(--font-size-xs);
+}
+
+.env-metric-label {
+  color: var(--gray-600);
+}
+
+.env-metric-value {
+  color: var(--gray-900);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-mono);
+}

@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Carbon Prediction Model",
+			"type": "shell",
+			"command": "/Users/a1/Documents/GitHub/CarbonPrompt-Playground/.venv/bin/python",
+			"args": [
+				"model.py"
+			],
+			"group": "build",
+			"isBackground": false
+		}
+	]
+}
